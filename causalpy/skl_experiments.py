@@ -114,9 +114,9 @@ class PrePostFit(ExperimentalDesign, PrePostFitDataValidator):
         self.post_pred = self.model.predict(X=self.post_X)
 
         # causal impact pre (ie the residuals of the model fit to observed)
-        self.pre_impact = self.pre_y - self.pre_pred
+        self.pre_impact = np.squeeze(self.pre_y) - np.squeeze(self.pre_pred)
         # causal impact post (ie the impact of the intervention)
-        self.post_impact = self.post_y - self.post_pred
+        self.post_impact = np.squeeze(self.post_y) - np.squeeze(self.post_pred)
 
         # cumulative impact post
         self.post_impact_cumulative = np.cumsum(self.post_impact)
